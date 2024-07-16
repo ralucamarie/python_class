@@ -64,7 +64,7 @@ def dayAndMonthValidation():
 
 def countyValidation():
     invalid = not (46 < judet < 51)
-    return (0 < judet <= 52) & invalid
+    return (0 < judet <= 52) and invalid
 
 
 def codeValidation():
@@ -95,11 +95,11 @@ def cnpValidation():
     if not controlValidation():
         print('Control Validation failed')
     return (sexValidation()
-            & yearValidation()
-            & dayAndMonthValidation()
-            & countyValidation()
-            & codeValidation()
-            & controlValidation())
+            and yearValidation()
+            and dayAndMonthValidation()
+            and countyValidation()
+            and codeValidation()
+            and controlValidation())
 
 
 # APP
