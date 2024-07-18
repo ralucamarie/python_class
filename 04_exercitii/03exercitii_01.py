@@ -1,3 +1,6 @@
+from collections import OrderedDict
+from operator import itemgetter
+
 """
 1. Sa se verifice daca textul introdus de la tastatura de catre un utilizator este un sir de
 
@@ -83,19 +86,100 @@ de la tastaura a unui numar intre 1 si 5 captat intr-o variabila. Prezentati pri
 
 acest sir de caractere:
 """
-text = input("1 – Afisare lista de cumparaturi\n2 – Adaugare element\n3 – Stergere elemen\n4 – Sterere lista de cumparaturi\n5 - Cautare in lista de cumparaturi\n")
+# text = input("1 – Afisare lista de cumparaturi\n2 – Adaugare element\n3 – Stergere elemen\n4 – Sterere lista de cumparaturi\n5 - Cautare in lista de cumparaturi\n")
+#
+# match text:
+#     case '1':
+#         print('Afisare lista de cumparaturi')
+#     case '2':
+#         print('Adaugare element')
+#     case '3':
+#         print('Stergere elemen')
+#     case '4':
+#         print('Sterere lista de cumparaturi')
+#     case '5':
+#         print('Cautare in lista de cumparaturi')
+#     case _:
+#         print('Alegerea nu exista. Reincercati')
 
-match text:
-    case '1':
-        print('Afisare lista de cumparaturi')
-    case '2':
-        print('Adaugare element')
-    case '3':
-        print('Stergere elemen')
-    case '4':
-        print('Sterere lista de cumparaturi')
-    case '5':
-        print('Cautare in lista de cumparaturi')
-    case _:
-        print('Alegerea nu exista. Reincercati')
+"""
+Avand doua liste, afisati o lista a elementelor comune ambelor liste
+"""
+#
+# a = [1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89]
+# b = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13]
+# result = []
+#
+# for element in a:
+#     if (element in b) and (element not in result):
+#         result.append(element)
+# print(result)
+
+"""
+Avand o lista de utilizatori si filme vizionate, listati 
+
+Cel mai vizionat film - Fight Club in cazul de mai sus
+
+Utilizatorul cu cele mai multe filme vizionate - Cristian in cazul de mai sus
+
+Extra
+Top filme dupa vizionari: Fight Club, Bond, Dracula, Shrek, The nun ...
+
+Top utilizatori cu cele mai multe filme vizionate - Cristian, George, Stefan"""
+
+listaUtilizatori = [
+    {
+        'nume': 'George',
+        'filme': ['Shrek', 'Bond', 'Fight Club']
+    },
+    {
+        'nume': 'Cristian',
+        'filme': ['Fight Club', 'The Nun', 'Dracula', 'Bond']
+    },
+
+    {
+        'nume': 'Stefan',
+        'filme': ['Fight Club', 'Slumdog Milionare']
+    }
+]
+
+movieStatistics = {}
+userStatistics = {}
+
+
+def topFilms():
+    global movieStatistics
+    for utilizator in listaUtilizatori:
+        for film in utilizator['filme']:
+            if film in movieStatistics:
+                movieStatistics[film] += 1
+            else:
+                movieStatistics[film] = 1
+
+
+def sort_dict_by_value_reverse(dictionary: dict, direction: str):
+    sortDesc = True if direction == 'desc' else False
+    sorted_dictionary = sorted(dictionary.items(), key=itemgetter(1), reverse = sortDesc)
+    return OrderedDict(sorted_dictionary)
+
+def topUsers():
+    global userStatistics
+    for utilizator in listaUtilizatori:
+        if not utilizator['nume'] in userStatistics:
+            userStatistics[utilizator['nume']] = len(utilizator['filme'])
+
+#Rezolvare
+topFilms()
+sortedMovieStatistics = sort_dict_by_value_reverse(movieStatistics, 'desc')
+topUsers()
+sortedUsersByMovies = sort_dict_by_value_reverse(userStatistics, 'desc')
+
+# Afisare statistici
+print('Cel mai vizionat films:\n' + list(sortedMovieStatistics)[0])
+print('Cel mai activ utilizator:\n' + list(sortedUsersByMovies)[0])
+print('Top filme dupa vizionari:')
+print(list(sortedMovieStatistics))
+print('Top utilizatori:')
+print(list(sortedUsersByMovies))
+
 
