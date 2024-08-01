@@ -50,7 +50,6 @@ def calculateComputerPosition():
     for pos in board:
         if not len(board[pos]):
             emptyPositions.append(pos)
-    print(emptyPositions)
     return random.choice(emptyPositions)
 
 
