@@ -41,12 +41,6 @@
 # len_vocale_filtrate = len(set(filter(lambda x: x in vocale, sir_caractere)))
 # print(len_vocale_filtrate)
 
-# P5 - nu inteleg cerinta!!
-# n1, n2, n3 = input("Introduceti numerele:\n"), input(), input()
-# if int(n1) == int(n2) == int(n3):
-#     print(int(n1), int(n2), int(n3))
-# else:
-#     print(int(n1) / int(n2) / int(n3))
 
 # P6
 # sir_numere = [1, 2, 3, 4, 5, 6, 7]
